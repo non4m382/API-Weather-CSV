@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "weather.url",
+      "type": "java.lang.String",
+      "description": "Description for weather.url."
+    }
+  ]
+}
