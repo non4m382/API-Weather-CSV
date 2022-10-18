@@ -2,6 +2,7 @@ package com.example.api_scheduler.utils;
 
 import com.example.api_scheduler.response.WeatherResponseNew;
 import com.opencsv.CSVWriter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -13,7 +14,8 @@ import java.util.List;
 @Component
 public class WriteToFile {
 
-    private static final String FILE_PATH = "src/main/resources/static/test.csv";
+    @Value("${api.file_folder}")
+    private String fileFolder;
     private static final String[] HEADER = {"Time", "Description", "Temperature", "Feels Like", "Wind Speed"};
 
     public String[] convert(WeatherResponseNew weatherResponseNew) {
@@ -26,16 +28,17 @@ public class WriteToFile {
         return list.toArray(new String[0]);
     }
 
-    public void print(String[] s) {
+    public void writeToFile(String[] data, String fileName) {
         List<String[]> csvData = new ArrayList<>();
 
-        File f = new File(FILE_PATH);
+        String filePath = fileFolder + "/" + fileName + ".csv";
+        File f = new File(filePath);
         if (!f.exists() || (f.isFile() && f.length() == 0)) {
             csvData.add(HEADER);
         }
-        csvData.add(s);
+        csvData.add(data);
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter(FILE_PATH, true))) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath, true))) {
             writer.writeAll(csvData);
         } catch (IOException e) {
             throw new RuntimeException(e);

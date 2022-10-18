@@ -13,11 +13,6 @@ import lombok.Setter;
 public class WeatherResponseNew extends CurrentWeather {
     private String time;
 
-//    public WeatherResponseNew(String time, String description, double temperature, double feelsLike, double windSpeed) {
-//        super(description, temperature, feelsLike, windSpeed);
-//        this.time = time;
-//    }
-
     @Override
     public String toString() {
         return "WeatherResponseNew{" +
