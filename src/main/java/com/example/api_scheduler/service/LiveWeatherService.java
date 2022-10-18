@@ -17,7 +17,7 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class LiveWeatherService {
 
-    private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q={city},{country}&APPID={key}&units=metric";
+    private static final String WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?q={city},{country}&APPID={key}&units=metric";
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
     @Value("${api.openweathermap.key}")
